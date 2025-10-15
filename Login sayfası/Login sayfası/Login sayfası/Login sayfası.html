@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giriş & Kayıt | Gym Portal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .wrapper {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      padding: 40px;
+      width: 370px;
+      border-radius: 20px;
+      color: #fff;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #fff;
+      outline: none;
+      color: #fff;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .input-group label {
+      position: absolute;
+      top: 12px;
+      left: 0;
+      color: #ccc;
+      pointer-events: none;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+
+    .input-group input:focus ~ label,
+    .input-group input:valid ~ label {
+      top: -10px;
+      font-size: 12px;
+      color: #f8d90f;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #f8d90f;
+      color: #000;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ffe94d;
+      transform: translateY(-2px);
+    }
+
+    .switch-text {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .switch-text a {
+      color: #f8d90f;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .switch-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* Geçiş animasyonu */
+    #registerForm {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    #registerForm.active {
+      display: block;
+      opacity: 1;
+    }
+
+    #loginForm.hidden {
+      display: none;
+      opacity: 0;
+    }
+
+    @media (max-width: 400px) {
+      .wrapper {
+        width: 90%;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h2 id="formTitle">Giriş Yap</h2>
+
+    <!-- Giriş Formu -->
+    <form id="loginForm">
+      <div class="input-group">
+        <input type="text" required>
+        <label>Kullanıcı Adı</label>
+      </div>
+      <div class="input-group">
+        <input type="password" required>
+        <label>Şifre</label>
+      </div>
+      <button type="submit" class="btn">Giriş Yap</button>
+      <p class="switch-text">Hesabın yok mu? <a href="#" id="showRegister">Kayıt Ol</a></p>
+    </form>
+
+    <!-- Kayıt Formu -->
+    <form id="registerForm">
+      <div class="input-group">
+        <input type="text" required>
+        <label>Ad Soyad</label>
+      </div>
+      <div class="input-group">
+        <input type="email" required>
+        <label>E-posta</label>
+      </div>
+      <div class="input-group">
+        <input type="text" required>
+        <label>Kullanıcı Adı</label>
+      </div>
+      <div class="input-group">
+        <input type="password" required>
+        <label>Şifre</label>
+      </div>
+      <button type="submit" class="btn">Kayıt Ol</button>
+      <p class="switch-text">Zaten hesabın var mı? <a href="#" id="showLogin">Giriş Yap</a></p>
+    </form>
+  </div>
+
+  <script>
+    const showRegister = document.getElementById('showRegister');
+    const showLogin = document.getElementById('showLogin');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const formTitle = document.getElementById('formTitle');
+
+    showRegister.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginForm.classList.add('hidden');
+      registerForm.classList.add('active');
+      formTitle.textContent = 'Kayıt Ol';
+    });
+
+    showLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginForm.classList.remove('hidden');
+      registerForm.classList.remove('active');
+      formTitle.textContent = 'Giriş Yap';
+    });
+  </script>
+</body>
+</html>
